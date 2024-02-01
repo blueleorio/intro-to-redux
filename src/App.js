@@ -1,5 +1,4 @@
 import React from "react";
-import counterReducer from "./features/counter/reducer";
 import { Counter } from "./features/counter/Counter";
 function App() {
   return (
