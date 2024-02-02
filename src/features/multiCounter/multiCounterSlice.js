@@ -2,33 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const multiCounterSlice = createSlice({
   name: "multiCounter",
-  initialState: {
-    value: [],
-  },
+  initialState: [],
   reducers: {
+    // const index = state.payload?.index,
     multiAdd: (state) => {
-      state.value.push(0);
+      return [...state, { count: 0 }];
     },
     multiIncrement: (state, action) => {
-      const index = action.payload;
-      state.value[index] += 1;
+      return state.map((counter, index) => {
+        if (index === action.payload) {
+          return { count: counter.count + 1 };
+        }
+        return counter;
+      });
     },
     multiDecrement: (state, action) => {
-      const index = action.payload;
-
-      state.value[index] -= 1;
-    },
-    multiIncrementByAmount: (state, action) => {
-      const { index, amount } = action.payload;
-      state.value[index] += amount;
+      return state.map((counter, index) => {
+        if (index === action.payload) {
+          return { count: counter.count - 1 };
+        }
+        return counter;
+      });
     },
   },
 });
 
-export const {
-  multiAdd,
-  multiIncrement,
-  multiDecrement,
-  multiIncrementByAmount,
-} = multiCounterSlice.actions;
+export const { multiAdd, multiIncrement, multiDecrement } =
+  multiCounterSlice.actions;
 export default multiCounterSlice.reducer;
