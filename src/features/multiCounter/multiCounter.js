@@ -14,9 +14,21 @@ export function MultiCounter() {
           </button>
           {counters.map((counter, index) => (
             <div key={index} style={{ margin: "10px" }}>
-              <button>+</button>
-              <span>0</span>
-              <button>-</button>
+              <button
+                onClick={() => {
+                  dispatch(multiIncrement(index));
+                }}
+              >
+                +
+              </button>
+              <span>{counter.count}</span>
+              <button
+                onClick={() => {
+                  dispatch(multiDecrement(index));
+                }}
+              >
+                -
+              </button>
             </div>
           ))}
         </div>
